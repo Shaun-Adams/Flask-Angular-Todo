@@ -7,13 +7,15 @@ import { TasksComponent } from './tasks/tasks.component';
 import { SimpleTodoComponent } from './simple-todo/simple-todo.component';
 import { JiraCloneTodoComponent } from './jira-clone-todo/jira-clone-todo.component'; // Import your component
 import { FormsModule } from '@angular/forms';
+import { TaskModalComponent } from './task-modal/task-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // TasksComponent,
     SimpleTodoComponent,
-    JiraCloneTodoComponent // Declare your component
+    JiraCloneTodoComponent,
+    TaskModalComponent // Declare your component
   ],
   imports: [
     BrowserModule,

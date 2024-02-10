@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TaskModalComponent } from '../task-modal/task-modal.component'; // Adjust the path as needed
+
 
 interface Task {
   id: number;
@@ -23,6 +25,16 @@ export class SimpleTodoComponent implements OnInit {
   filteredTasks: Task[] = [];
   showCompleted: boolean = false;
 
+  @ViewChild(TaskModalComponent) taskModal!: TaskModalComponent;
+
+  openModal() {
+    this.taskModal.show();
+  }
+  handleTaskAdded(task: { title: string, description: string }) {
+    // Call the method to add the task to the backend and refresh the list
+    this.addTask(task.title, task.description);
+  }
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -36,7 +48,7 @@ export class SimpleTodoComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  addTask() {
+  addTask(title: string, description: string)  {
     if (!this.newTaskTitle.trim()) {
       // Prevent adding empty tasks
       return;
