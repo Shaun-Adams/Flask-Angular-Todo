@@ -1,0 +1,10 @@
+
+<button (click)="viewMode = 'simple'">Simple</button>
+<button (click)="viewMode = 'jira'">Jira Clone</button>
+<ng-container [ngSwitch]="viewMode">
+  <app-simple-todo *ngSwitchCase="'simple'"></app-simple-todo>
+  <app-jira-clone-todo *ngSwitchCase="'jira'"></app-jira-clone-todo>
+</ng-container>
+
+<!-- app.component.html -->
+<router-outlet></router-outlet>

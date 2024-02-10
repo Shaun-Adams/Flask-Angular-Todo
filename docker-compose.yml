@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  flask_angular_app:
+    container_name: flask_angular_app
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@todo_db:5432/postgres
+    depends_on:
+      - todo_db
+
+  todo_db:
+    container_name: todo_db
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  angular-todo:
+    container_name: angular-todo
+    build:
+      context: .  # This should point to the directory containing both angular-todo/ and default.conf
+      dockerfile: angular-todo/Dockerfile
+    ports:
+      - "80:80"
+
+volumes:
+  pgdata: {}

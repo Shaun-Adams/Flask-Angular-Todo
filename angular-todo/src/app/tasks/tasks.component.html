@@ -1,0 +1,16 @@
+<div>
+    <h1>Todo List</h1>
+    <form (submit)="addTask(title, description)">
+      <input type="text" #title placeholder="Title">
+      <input type="text" #description placeholder="Description">
+      <button type="submit">Add Task</button>
+    </form>
+    <ul>
+      <li *ngFor="let task of tasks">
+        {{ task.title }} - {{ task.description }}
+        <button (click)="deleteTask(task.id)">Delete</button>
+        <button (click)="toggleCompleted(task.id, task.completed)">Toggle Complete</button>
+      </li>
+    </ul>
+  </div>
+  

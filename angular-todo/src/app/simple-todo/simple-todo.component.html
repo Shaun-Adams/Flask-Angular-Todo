@@ -1,0 +1,41 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Todo List</h1>
+        </div>
+        <div class="col-md-6">
+            <button class="add-btn">+</button>
+        </div>
+    </div>
+
+    <div class="todo-container">
+        <h1>Todo List</h1>
+        <div class="filter-buttons">
+            <button class="filter-btn not-completed" [class.active]="!showCompleted" (click)="filterTasks(false)">Not Completed</button>
+            <button class="filter-btn completed" [class.active]="showCompleted" (click)="filterTasks(true)">Completed</button>
+        </div>
+        <div class="add-task">
+          <input type="text" placeholder="Add a task" [(ngModel)]="newTaskTitle" />
+          <button class="add-btn" (click)="addTask()">+</button>
+        </div>
+        <ul class="tasks-list">
+            <li *ngFor="let task of filteredTasks"> 
+                <div *ngIf="!task.isEditing; else editTemplate">
+                <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)">
+                <span [class.completed]="task.completed">{{ task.title }}</span>
+                <button class="edit-btn" (click)="startEditing(task)">✎</button>
+                <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
+                </div>
+                <ng-template #editTemplate>
+                <input type="text" [(ngModel)]="editTaskTitle">
+                <button class="save-btn" (click)="saveTask(task)">💾</button>
+                <button class="cancel-btn" (click)="cancelEditing(task)">❌</button>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
