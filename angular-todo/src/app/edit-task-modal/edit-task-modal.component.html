@@ -1,17 +1,11 @@
 <div class="modal-backdrop" (click)="closeModal()">
-    <div class="modal" (click)="$event.stopPropagation()">
-      <div class="modal-header">
-        <h2>Edit Task</h2>
-        <span class="close-btn" (click)="closeModal()">&times;</span>
-      </div>
-      <div class="modal-content">
-        <input class="modal-input" type="text" [(ngModel)]="task?.title" placeholder="Title" required>
-        <textarea class="modal-input" [(ngModel)]="task?.description" placeholder="Description (optional)"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button (click)="onEditTask()" class="modal-button save-button">Update</button>
-        <button (click)="closeModal()" class="modal-button cancel-button">Cancel</button>
-      </div>
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h2>Edit Task</h2>
+    <input type="text" [(ngModel)]="task?.title" placeholder="Title" required>
+    <textarea [(ngModel)]="task?.description" placeholder="Description (optional)"></textarea>
+    <div class="modal-footer">
+      <button (click)="onEditTask()" class="modal-button save-button">Save</button>
+      <button (click)="closeModal()" class="modal-button cancel-button">Cancel</button>
     </div>
   </div>
-  
+</div>

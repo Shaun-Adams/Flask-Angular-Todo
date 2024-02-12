@@ -1,5 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+export interface Task {
+  id: number;
+  title: string;
+  description?: string;
+  completed: boolean;
+}
+
 @Component({
   selector: 'app-edit-task-modal',
   templateUrl: './edit-task-modal.component.html',
@@ -7,25 +14,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class EditTaskModalComponent {
   @Input() task: Task | null = null;
-  @Output() taskUpdated = new EventEmitter<{ title: string; description?: string }>();
+  @Output() taskUpdated = new EventEmitter<Task>();
   @Output() closeModalEvent = new EventEmitter<void>();
-  title: string = '';
-  description?: string = '';
-  showModal = false;
-
-  handleCloseModal() {
-    this.showModal = false;
-}
 
   onEditTask() {
-    if (!this.title.trim()) return;
-    this.taskUpdated.emit({
-      title: this.title,
-      description: this.description
-    });
-    this.title = ''; 
-    this.description = '';
-    this.closeModal();
+    if (this.task && this.task.title.trim()) {
+      this.taskUpdated.emit(this.task);
+    }
   }
 
   closeModal() {

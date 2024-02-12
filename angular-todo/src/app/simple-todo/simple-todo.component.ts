@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Task } from '../edit-task-modal/edit-task-modal.component'; // Adjust path as needed
-
 
 interface Task {
   id?: number;
