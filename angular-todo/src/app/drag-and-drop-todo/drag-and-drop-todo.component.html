@@ -1,0 +1,9 @@
+<div class="drag-and-drop-todo-board">
+    <div class="list" *ngFor="let list of board" cdkDropList [cdkDropListData]="list.tasks" (cdkDropListDropped)="drop($event)">
+      <h3>{{ list.title }}</h3>
+      <div *ngFor="let task of list.tasks" cdkDrag class="task">
+        {{ task.name }}
+      </div>
+    </div>
+  </div>
+  

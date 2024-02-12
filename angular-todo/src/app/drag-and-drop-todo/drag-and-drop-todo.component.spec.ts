@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JiraCloneTodoComponent } from './jira-clone-todo.component';
+import { DragAndDropTodoComponent } from './drag-and-drop-todo.component';
 
-describe('JiraCloneTodoComponent', () => {
-  let component: JiraCloneTodoComponent;
-  let fixture: ComponentFixture<JiraCloneTodoComponent>;
+describe('DragAndDropTodoComponent', () => {
+  let component: DragAndDropTodoComponent;
+  let fixture: ComponentFixture<DragAndDropTodoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JiraCloneTodoComponent ]
+      declarations: [ DragAndDropTodoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JiraCloneTodoComponent);
+    fixture = TestBed.createComponent(DragAndDropTodoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
