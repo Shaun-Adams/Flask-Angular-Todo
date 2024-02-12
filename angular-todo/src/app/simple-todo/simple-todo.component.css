@@ -1,42 +1,89 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+
+    background: hwb(0 20% 9% / 0.687);
+    padding: 20px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 600px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.header-container h1 {
+  margin-right: auto;
+  color: #ffffff;
+  font-size: 2em;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: #363535 0.5px 0.5px 0.5px;
+}
+
 .todo-container {
     background: #fff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 600px;
+    max-width: 600px;
     margin: auto;
   }
   
   .todo-container h1 {
     text-align: center;
   }
+
   
-/* Add this at the top of your simple-todo.component.css file */
+/* simple-todo.component.css */
+
 .filter-buttons {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  
-  .filter-btn {
-    flex: 1;
-    padding: 10px 20px;
-    text-align: center;
-    background: #f0f0f0;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .filter-btn:not(:last-child) {
-    border-right: 1px solid #ccc;
-  }
-  
-  .filter-btn:hover, .filter-btn.active {
-    background-color: #e0e0e0;
-  }
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 10px 20px;
+  text-align: center;
+  color: #333; /* Default text color */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
+  font-weight: normal; /* Default font weight */
+}
+
+.filter-btn.not-completed {
+  background: #FFDAB9; /* Peach color */
+}
+
+.filter-btn.not-completed:hover {
+  background: #ffcba1; /* Slightly darker peach color for hover */
+}
+
+.filter-btn.not-completed.active {
+  background: #ffe5cf; /* Brighter peach color when active */
+  font-weight: bold; /* Make text bold when active */
+  color: #000; /* Make text color darker to stand out */
+}
+
+.filter-btn.completed {
+  background: #FE3C72; /* Pink color */
+}
+
+.filter-btn.completed:hover {
+  background: #e03668; /* Slightly darker pink color for hover */
+}
+
+.filter-btn.completed.active {
+  background: #ff547e; /* Brighter pink color when active */
+  font-weight: bold; /* Make text bold when active */
+  color: #fff; /* Make text color white to stand out */
+}
+
   
   /* Add any additional styles for your component below */
   
@@ -69,30 +116,174 @@
     height: 30px;
     cursor: pointer;
   }
-  
-  .tasks-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .tasks-list li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .tasks-list li .edit-btn,
-  .tasks-list li .delete-btn {
-    background: none;
+
+  .tinder-btn {
+    display: inline-block;
+    font-size: 24px;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #b7254a;
+    border-radius: 50%;
     border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  }
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.tinder-btn:hover {
+    background-color: #871d37;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tinder-btn:active {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+}
   
-  .tasks-list li .completed {
-    text-decoration: line-through;
+ /* simple-todo.component.css */
+
+.tasks-list {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  background: #fff; /* Background color for the task list */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for some depth */
+  margin: 20px 0; /* Add some margin at the top and bottom */
+  border-left: 4px solid #ffcba1; /* Marginal line on the left */
+}
+
+.tasks-list li {
+  position: relative; /* Position relative for pseudo-element positioning */
+  padding: 10px 20px; /* Padding around tasks */
+  border-bottom: 1px solid #eee; /* Separating lines */
+  display: flex; /* Use flex layout for horizontal alignment */
+  align-items: center; /* Align items vertically */
+}
+
+.tasks-list li .completed {
+  text-decoration: line-through;
+  color: #888; /* Greyed out text */
+}
+
+.task-item {
+  display: flex; /* Use flexbox for inline layout */
+  justify-content: space-between; /* Align items with space between */
+  align-items: center; /* Center items vertically */
+  width: 100%; /* Ensure the item takes full width */
+}
+
+.custom-checkbox-label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 35px; /* Space for the custom checkbox */
+  margin-right: 20px; /* Margin between checkbox and text */
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.custom-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  z-index: 2; /* Lay the actual checkbox above the pseudo-element */
+  cursor: pointer;
+  opacity: 0; /* Hide the actual checkbox, but it remains clickable */
+}
+
+.custom-checkbox + span {
+  position: relative; /* This allows us to position the pseudo-elements */
+  padding-left: 35px; /* Make space for the custom checkbox */
+}
+
+.custom-checkbox + span:before {
+  content: ''; /* Clear the content */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: #fff; /* Start with a white background */
+  z-index: 1; /* The pseudo-element goes under the actual checkbox */
+}
+
+.custom-checkbox:checked + span:before {
+  background-color: #28a745; /* Change to a green background when checked */
+  border-color: #28a745; /* Green border to match */
+  content: '✔'; /* Insert a checkmark */
+  color: #fff; /* White color for the checkmark */
+  font-size: 16px; /* Adjust the size of the checkmark as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold; /* Optional: makes the checkmark bolder */
+}
+
+
+/* Optional: Style for edit and delete buttons */
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Optional: Adjust the size of the edit and delete buttons */
+.edit-btn:before, .delete-btn:before {
+  display: inline-block;
+  content: '';
+  height: 16px;
+  width: 16px;
+  /* Set background images for edit and delete buttons here */
+}
+
+/* Style for the input field when editing a task */
+.edit-input {
+  flex-grow: 1; /* Allows the input to take up available space */
+  padding: 5px;
+  margin-right: 10px; /* Space between the input and the save button */
+  border: 1px solid #ccc; /* Similar to edit and delete button styling */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Style for save and cancel buttons */
+.save-btn, .cancel-btn {
+  background: none;
+  border: 1px solid #ccc; /* Add a border similar to edit and delete buttons */
+  padding: 5px 10px; /* Padding inside the buttons */
+  margin-left: 10px; /* Space between the buttons */
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.2s, color 0.2s; /* Transition for hover effects */
+}
+
+/* Hover effect for buttons */
+.save-btn:hover {
+  background-color: #4CAF50; /* Green background for save on hover */
+  color: white; /* White text on hover */
+  border-color: #4CAF50; /* Border color changes to match the background */
+}
+
+.cancel-btn:hover {
+  background-color: #f44336; /* Red background for cancel on hover */
+  color: white; /* White text on hover */
+  border-color: #f44336; /* Border color changes to match the background */
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .header-container,
+  .todo-container {
+    width: 200px;
+    max-width: none;
   }
-  
-  .save-btn, .cancel-btn {
-    margin-left: 5px;
-  }
+}

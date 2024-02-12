@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task-modal',
@@ -6,29 +6,27 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./task-modal.component.css']
 })
 export class TaskModalComponent {
-  isVisible: boolean = false;
   taskTitle: string = '';
   taskDescription: string = '';
-  
-  @Output() taskAdded = new EventEmitter<{title: string, description: string}>();
+  showModal: boolean = false;
 
-  show() {
-    this.isVisible = true;
+  @Output() onAddTask = new EventEmitter<{ title: string, description: string }>();
+
+  addNewTask() {
+    this.onAddTask.emit({
+      title: this.taskTitle,
+      description: this.taskDescription
+    });
+    this.closeModal();
   }
 
-  hide() {
-    this.isVisible = false;
+  closeModal() {
+    this.showModal = false;
     this.taskTitle = '';
     this.taskDescription = '';
   }
 
-  addTask() {
-    if (this.taskTitle.trim()) {
-      this.taskAdded.emit({ 
-        title: this.taskTitle, 
-        description: this.taskDescription 
-      });
-      this.hide();
-    }
+  openModal() {
+    this.showModal = true;
   }
 }
