@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Task } from '../edit-task-modal/edit-task-modal.component'; // Adjust path as needed
+
 
 interface Task {
   id?: number;
@@ -21,6 +23,7 @@ export class SimpleTodoComponent implements OnInit {
   newTask: Partial<Task> = {};
   editTaskTitle: string = '';
   filteredTasks: Task[] = [];
+  
 
   constructor(private http: HttpClient) {}
 

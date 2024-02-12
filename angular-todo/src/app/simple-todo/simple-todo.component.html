@@ -29,7 +29,16 @@
                 <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
                 <span [ngClass]="{'completed': task.completed}">{{ task.description }}</span>
               </label>
-              <button class="edit-btn" [class.hidden]="showCompleted" (click)="startEditing(task)">✎</button>
+              <!-- ... -->
+              <button class="edit-btn" *ngIf="!task.completed" (click)="openEditModal(task)">✎</button>
+              <app-edit-task-modal
+                *ngIf="editingTask"
+                [task]="editingTask"
+                (taskUpdated)="handleTaskUpdated($event)"
+                (closeModalEvent)="editingTask = null">
+              </app-edit-task-modal>
+              <!-- ... -->
+
               <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
             </div>
             <ng-template #editTemplate>

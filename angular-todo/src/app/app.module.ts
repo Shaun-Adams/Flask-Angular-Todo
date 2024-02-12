@@ -7,12 +7,14 @@ import { SimpleTodoComponent } from './simple-todo/simple-todo.component';
 import { FormsModule } from '@angular/forms';
 import { AddTaskModalComponent } from './add-task-modal/add-task-modal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { EditTaskModalComponent } from './edit-task-modal/edit-task-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SimpleTodoComponent,
     AddTaskModalComponent,
+    EditTaskModalComponent,
   ],
   imports: [
     BrowserModule,
