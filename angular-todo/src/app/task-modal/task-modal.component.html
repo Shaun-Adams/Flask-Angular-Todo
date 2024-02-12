@@ -1,15 +1,15 @@
-<div class="modal-overlay" *ngIf="showModal">
+<div class="modal-backdrop" *ngIf="display">
   <div class="modal">
-    <div class="modal-header">
-      <h3>Add New Task</h3>
-      <button class="close-modal" (click)="closeModal()">&times;</button>
+    <header class="modal-header">
+      <h2>Add Task</h2>
+      <button class="close-btn" (click)="close()">×</button>
+    </header>
+    <div class="modal-content">
+      <input type="text" placeholder="Task title" [(ngModel)]="taskTitle">
+      <textarea placeholder="Task description (optional)" [(ngModel)]="taskDescription"></textarea>
     </div>
-    <div class="modal-body">
-      <input [(ngModel)]="taskTitle" placeholder="Task Title" class="modal-input" />
-      <textarea [(ngModel)]="taskDescription" placeholder="Task Description (Optional)" class="modal-textarea"></textarea>
-    </div>
-    <div class="modal-footer">
-      <button (click)="addNewTask()">Add Task</button>
-    </div>
+    <footer class="modal-footer">
+      <button (click)="save()">Save</button>
+    </footer>
   </div>
 </div>

@@ -1,41 +1,41 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="header-container">
-                <h1>Todo List</h1>
-                <!-- ... existing HTML ... -->
-<button class="tinder-btn" (click)="taskModal.openModal()">+</button>
-<app-task-modal #taskModal (onAddTask)="addTask($event.title, $event.description)"></app-task-modal>
-<!-- ... rest of your HTML ... -->
+  <div class="row">
+      <div class="col-md-12">
+          <div class="header-container">
+              <h1>Todo List</h1>
+              <button class="tinder-btn" (click)="showModal = true">+</button>
+              <app-add-task-modal 
+                *ngIf="showModal" 
+                (taskAdded)="handleTaskAdded($event)" 
+                (close)="showModal = false">
+              </app-add-task-modal>
+          </div>
+      </div>
+  </div>
 
+  <div class="todo-container">
+      <div class="filter-buttons">
+          <button class="filter-btn not-completed" [class.active]="!showCompleted" (click)="filterTasks(false)">Not Completed</button>
+          <button class="filter-btn completed" [class.active]="showCompleted" (click)="filterTasks(true)">Completed</button>
+      </div>
+
+      <ul class="tasks-list">
+          <li *ngFor="let task of filteredTasks" [class.completed]="task.completed"> 
+            <div *ngIf="!task.isEditing; else editTemplate" class="task-item">
+              <label class="custom-checkbox-label">
+                <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)" class="custom-checkbox">
+                <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
+                <span [ngClass]="{'completed': task.completed}">{{ task.description }}</span>
+              </label>
+              <button class="edit-btn" (click)="startEditing(task)">✎</button>
+              <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
             </div>
-        </div>
-    </div>
-
-    <div class="todo-container">
-        <div class="filter-buttons">
-            <button class="filter-btn not-completed" [class.active]="!showCompleted" (click)="filterTasks(false)">Not Completed</button>
-            <button class="filter-btn completed" [class.active]="showCompleted" (click)="filterTasks(true)">Completed</button>
-        </div>
-
-        <ul class="tasks-list">
-            <li *ngFor="let task of filteredTasks" [class.completed]="task.completed"> 
-              <div *ngIf="!task.isEditing; else editTemplate" class="task-item">
-                <!-- Updated label to include the 'completed' class for strikethrough -->
-                <label class="custom-checkbox-label">
-                  <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)" class="custom-checkbox">
-                  <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
-                </label>
-                <button class="edit-btn" (click)="startEditing(task)">✎</button>
-                <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
-              </div>
-              <ng-template #editTemplate>
-                <input type="text" [(ngModel)]="editTaskTitle" class="edit-input">
-                <button class="save-btn" (click)="saveTask(task)">💾</button>
-                <button class="cancel-btn" (click)="cancelEditing(task)">❌</button>
-              </ng-template>
-              
-            </li>
-          </ul>
-    </div>
+            <ng-template #editTemplate>
+              <input type="text" [(ngModel)]="editTaskTitle" class="edit-input">
+              <button class="save-btn" (click)="saveTask(task)">💾</button>
+              <button class="cancel-btn" (click)="cancelEditing(task)">❌</button>
+            </ng-template>
+          </li>
+      </ul>
+  </div>
 </div>

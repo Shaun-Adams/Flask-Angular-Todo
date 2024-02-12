@@ -193,7 +193,6 @@
   margin: 0;
   z-index: 2; /* Lay the actual checkbox above the pseudo-element */
   cursor: pointer;
-  opacity: 0; /* Hide the actual checkbox, but it remains clickable */
 }
 
 .custom-checkbox + span {

@@ -1,0 +1,11 @@
+<div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h2>Add Task</h2>
+      <span class="close" (click)="closeModal()">&times;</span> <!-- Add close button -->
+      <input type="text" [(ngModel)]="title" placeholder="Title" required>
+      <textarea [(ngModel)]="description" placeholder="Description (optional)"></textarea>
+      <button (click)="onAddTask()">Add</button>
+      <button (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+  
