@@ -25,12 +25,17 @@
           <li *ngFor="let task of filteredTasks" [class.completed]="task.completed"> 
             <div *ngIf="!task.isEditing; else editTemplate" class="task-item">
               <label class="custom-checkbox-label">
-                <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)" class="custom-checkbox">
-                <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
-                <span [ngClass]="{'completed': task.completed}">{{ task.description }}</span>
-              </label>
-              <button class="edit-btn" [class.hidden]="showCompleted" (click)="startEditing(task)">✎</button>
-              <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
+                <input type="checkbox" class="custom-checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)">
+                <div class="task-text">
+                  <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
+                  <div class="task-description" [ngClass]="{'completed': task.completed}">{{ task.description }}</div>
+                </div>
+            </label>
+
+              <div class="task-buttons">
+                <button class="edit-btn" [class.hidden]="showCompleted" (click)="startEditing(task)">✎</button>
+                <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
+              </div>
             </div>
             <ng-template #editTemplate>
               <input type="text" [(ngModel)]="editTaskTitle" class="edit-input">
