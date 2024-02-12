@@ -1,8 +1,6 @@
 .header-container {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
-
     background: hwb(0 20% 9% / 0.687);
     padding: 20px;
     border-radius: 8px 8px 0 0;
@@ -34,9 +32,10 @@
   .todo-container h1 {
     text-align: center;
   }
-
   
-/* simple-todo.component.css */
+.hidden {
+  display: none;
+}
 
 .filter-buttons {
   display: flex;
@@ -49,133 +48,127 @@
   flex: 1;
   padding: 10px 20px;
   text-align: center;
-  color: #333; /* Default text color */
+  color: #333;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease, font-weight 0.3s ease;
-  font-weight: normal; /* Default font weight */
+  font-weight: normal;
 }
 
 .filter-btn.not-completed {
-  background: #FFDAB9; /* Peach color */
+  background: #FFDAB9;
 }
 
 .filter-btn.not-completed:hover {
-  background: #ffcba1; /* Slightly darker peach color for hover */
+  background: #ffcba1;
 }
 
 .filter-btn.not-completed.active {
-  background: #ffe5cf; /* Brighter peach color when active */
-  font-weight: bold; /* Make text bold when active */
-  color: #000; /* Make text color darker to stand out */
+  background: #ffe5cf;
+  font-weight: bold;
+  color: #000;
 }
 
 .filter-btn.completed {
-  background: #FE3C72; /* Pink color */
+  background: #FE3C72;
 }
 
 .filter-btn.completed:hover {
-  background: #e03668; /* Slightly darker pink color for hover */
+  background: #e03668;
 }
 
 .filter-btn.completed.active {
-  background: #ff547e; /* Brighter pink color when active */
-  font-weight: bold; /* Make text bold when active */
-  color: #fff; /* Make text color white to stand out */
+  background: #ff547e;
+  font-weight: bold;
+  color: #fff;
 }
 
-  
-  /* Add any additional styles for your component below */
-  
-  
-  .not-completed {
-    background-color: #e0e0e0;
-  }
-  
-  .completed {
-    background-color: #8f8;
-  }
-  
-  .add-task {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .add-task input {
-    flex-grow: 1;
-    padding: 5px;
-  }
-  
-  .add-btn {
-    background-color: #0f0;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-  }
+.not-completed {
+  background-color: #e0e0e0;
+}
 
-  .tinder-btn {
-    display: inline-block;
-    font-size: 24px;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: #b7254a;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+.completed {
+  background-color: #8f8;
+}
+
+.add-task {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.add-task input {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.add-btn {
+  background-color: #0f0;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.tinder-btn {
+  display: inline-block;
+  font-size: 24px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #b7254a;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .tinder-btn:hover {
-    background-color: #871d37;
-    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
+  background-color: #871d37;
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.1);
 }
 
 .tinder-btn:active {
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    transform: scale(0.95);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+  transform: scale(0.95);
 }
-  
- /* simple-todo.component.css */
 
 .tasks-list {
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
-  background: #fff; /* Background color for the task list */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for some depth */
-  margin: 20px 0; /* Add some margin at the top and bottom */
-  border-left: 4px solid #ffcba1; /* Marginal line on the left */
+  list-style-type: none;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  border-left: 4px solid #ffcba1;
 }
 
 .tasks-list li {
-  position: relative; /* Position relative for pseudo-element positioning */
-  padding: 10px 20px; /* Padding around tasks */
-  border-bottom: 1px solid #eee; /* Separating lines */
-  display: flex; /* Use flex layout for horizontal alignment */
-  align-items: center; /* Align items vertically */
+  position: relative;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
 }
 
 .tasks-list li .completed {
   text-decoration: line-through;
-  color: #888; /* Greyed out text */
+  color: #888;
 }
 
 .task-item {
-  display: flex; /* Use flexbox for inline layout */
-  justify-content: space-between; /* Align items with space between */
-  align-items: center; /* Center items vertically */
-  width: 100%; /* Ensure the item takes full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .custom-checkbox-label {
   display: flex;
   align-items: center;
   position: relative;
-  padding-left: 35px; /* Space for the custom checkbox */
-  margin-right: 20px; /* Margin between checkbox and text */
+  padding-left: 35px;
+  margin-right: 20px;
   cursor: pointer;
   flex-grow: 1;
 }
@@ -191,17 +184,17 @@
   width: 20px;
   height: 20px;
   margin: 0;
-  z-index: 2; /* Lay the actual checkbox above the pseudo-element */
+  z-index: 2;
   cursor: pointer;
 }
 
 .custom-checkbox + span {
-  position: relative; /* This allows us to position the pseudo-elements */
-  padding-left: 35px; /* Make space for the custom checkbox */
+  position: relative;
+  padding-left: 35px;
 }
 
 .custom-checkbox + span:before {
-  content: ''; /* Clear the content */
+  content: '';
   position: absolute;
   left: 0;
   top: 50%;
@@ -210,24 +203,22 @@
   height: 20px;
   border-radius: 50%;
   border: 2px solid #ccc;
-  background-color: #fff; /* Start with a white background */
-  z-index: 1; /* The pseudo-element goes under the actual checkbox */
+  background-color: #fff;
+  z-index: 1;
 }
 
 .custom-checkbox:checked + span:before {
-  background-color: #28a745; /* Change to a green background when checked */
-  border-color: #28a745; /* Green border to match */
-  content: '✔'; /* Insert a checkmark */
-  color: #fff; /* White color for the checkmark */
-  font-size: 16px; /* Adjust the size of the checkmark as needed */
+  background-color: #28a745;
+  border-color: #28a745;
+  content: '✔';
+  color: #fff;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold; /* Optional: makes the checkmark bolder */
+  font-weight: bold;
 }
 
-
-/* Optional: Style for edit and delete buttons */
 .edit-btn, .delete-btn {
   background: none;
   border: none;
@@ -235,49 +226,42 @@
   margin-left: 10px;
 }
 
-/* Optional: Adjust the size of the edit and delete buttons */
 .edit-btn:before, .delete-btn:before {
   display: inline-block;
   content: '';
   height: 16px;
   width: 16px;
-  /* Set background images for edit and delete buttons here */
 }
 
-/* Style for the input field when editing a task */
 .edit-input {
-  flex-grow: 1; /* Allows the input to take up available space */
+  flex-grow: 1;
   padding: 5px;
-  margin-right: 10px; /* Space between the input and the save button */
-  border: 1px solid #ccc; /* Similar to edit and delete button styling */
-  border-radius: 4px; /* Rounded corners */
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Style for save and cancel buttons */
 .save-btn, .cancel-btn {
   background: none;
-  border: 1px solid #ccc; /* Add a border similar to edit and delete buttons */
-  padding: 5px 10px; /* Padding inside the buttons */
-  margin-left: 10px; /* Space between the buttons */
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin-left: 10px;
   cursor: pointer;
-  border-radius: 4px; /* Rounded corners */
-  transition: background-color 0.2s, color 0.2s; /* Transition for hover effects */
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-/* Hover effect for buttons */
 .save-btn:hover {
-  background-color: #4CAF50; /* Green background for save on hover */
-  color: white; /* White text on hover */
-  border-color: #4CAF50; /* Border color changes to match the background */
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
 }
 
 .cancel-btn:hover {
-  background-color: #f44336; /* Red background for cancel on hover */
-  color: white; /* White text on hover */
-  border-color: #f44336; /* Border color changes to match the background */
+  background-color: #f44336;
+  color: white;
+  border-color: #f44336;
 }
-
-
 
 @media screen and (max-width: 600px) {
   .header-container,

@@ -10,6 +10,11 @@ export class AddTaskModalComponent {
   @Output() closeModalEvent = new EventEmitter<void>();
   title: string = '';
   description?: string = '';
+  showModal = false;
+
+  handleCloseModal() {
+    this.showModal = false;
+}
 
   onAddTask() {
     if (!this.title.trim()) return;
@@ -17,7 +22,7 @@ export class AddTaskModalComponent {
       title: this.title,
       description: this.description
     });
-    this.title = ''; // Reset the form fields
+    this.title = ''; 
     this.description = '';
     this.closeModal();
   }

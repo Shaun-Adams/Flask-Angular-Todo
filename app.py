@@ -26,9 +26,6 @@ class Todo(db.Model):
             'completed': self.completed
         }
 
-with app.app_context():
-    db.create_all()
-
 @app.route('/')
 def serve_index():
     return render_template('index.html')
@@ -44,7 +41,6 @@ def create_task():
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     tasks = Todo.query.all()
-    print(tasks)  # Print the tasks to the console
     return make_response(jsonify([task.json() for task in tasks]), HTTPStatus.OK)
 
 @app.route('/tasks/<int:id>', methods=['GET'])
@@ -88,4 +84,6 @@ def delete_task(id):
     return make_response(jsonify({'message': 'task not found'}), HTTPStatus.NOT_FOUND)
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

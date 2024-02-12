@@ -1,10 +1,5 @@
-
-<button (click)="viewMode = 'simple'">Simple</button>
-<button (click)="viewMode = 'drag-and-drop-todo-board'">Jira Clone</button>
 <ng-container [ngSwitch]="viewMode">
   <app-simple-todo *ngSwitchCase="'simple'"></app-simple-todo>
-  <app-drag-and-drop-todo *ngSwitchCase="'jira'"></app-drag-and-drop-todo>
 </ng-container>
 
-<!-- app.component.html -->
 <router-outlet></router-outlet>
