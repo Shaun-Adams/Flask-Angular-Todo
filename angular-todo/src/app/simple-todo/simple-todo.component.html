@@ -25,22 +25,28 @@
           <li *ngFor="let task of filteredTasks" [class.completed]="task.completed"> 
             <div *ngIf="!task.isEditing; else editTemplate" class="task-item">
               <label class="custom-checkbox-label">
-                <input type="checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)" class="custom-checkbox">
-                <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
-                <span [ngClass]="{'completed': task.completed}">{{ task.description }}</span>
-              </label>
-              <!-- ... -->
-              <button class="edit-btn" *ngIf="!task.completed" (click)="openEditModal(task)">✎</button>
-              <app-edit-task-modal
+                <input type="checkbox" class="custom-checkbox" [checked]="task.completed" (change)="toggleTaskCompletion(task)">
+                <div class="task-text">
+                  <span [ngClass]="{'completed': task.completed}">{{ task.title }}</span>
+                  <div class="task-description" [ngClass]="{'completed': task.completed}">{{ task.description }}</div>
+                </div>
+            </label>
+
+              <div class="task-buttons">
+                <button class="edit-btn" [class.hidden]="showCompleted" (click)="startEditing(task)">✎</button>
+                <button class="edit-btn" *ngIf="!task.completed" (click)="openEditModal(task)">✎</button>
+
+                <app-edit-task-modal
                 *ngIf="editingTask"
                 [task]="editingTask"
                 (taskUpdated)="handleTaskUpdated($event)"
                 (closeModalEvent)="editingTask = null">
-              </app-edit-task-modal>
-              <!-- ... -->
+                </app-edit-task-modal>
 
-              <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
+                <button class="delete-btn" (click)="deleteTask(task)">🗑️</button>
+              </div>
             </div>
+
             <ng-template #editTemplate>
               <input type="text" [(ngModel)]="editTaskTitle" class="edit-input">
               <button class="save-btn" (click)="saveTask(task)">💾</button>
