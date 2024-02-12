@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { TaskModalComponent } from '../task-modal/task-modal.component'; // Adjust the path as needed
-
 
 interface Task {
-  id: number;
+  id?: number;
   title: string;
   description?: string;
   completed: boolean;
@@ -18,68 +16,86 @@ interface Task {
 })
 export class SimpleTodoComponent implements OnInit {
   tasks: Task[] = [];
-  tasksToShow: Task[] = [];
-  newTaskTitle: string = '';
-  newTaskDescription: string = ''; // Optional: Add this if you have a description field
+  showCompleted = false;
+  showModal = false;
+  newTask: Partial<Task> = {};
   editTaskTitle: string = '';
   filteredTasks: Task[] = [];
-  showCompleted: boolean = false;
-
-  @ViewChild(TaskModalComponent) taskModal!: TaskModalComponent;
-
-  openModal() {
-    this.taskModal.show();
-  }
-  handleTaskAdded(task: { title: string, description: string }) {
-    // Call the method to add the task to the backend and refresh the list
-    this.addTask(task.title, task.description);
-  }
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getTasks();
   }
 
-  getTasks() {
+  handleCloseModal() {
+    this.showModal = false;
+  }
+
+  getTasks(): void {
     this.http.get<Task[]>('http://localhost:4000/tasks').subscribe(tasks => {
       this.tasks = tasks;
-      this.tasksToShow = [...this.tasks]; // Initially show all tasks
+      this.filteredTasks = this.tasks.filter(task => task.completed === this.showCompleted);
     }, error => console.error(error));
   }
 
-  addTask(title: string, description: string)  {
-    if (!this.newTaskTitle.trim()) {
-      // Prevent adding empty tasks
+  handleTaskAdded(task: { title: string, description?: string }) {
+    this.addTask(task.title, task.description);
+  }
+
+  addTask(title: string, description?: string): void {
+    if (!title.trim()) {
       return;
     }
-    const newTask = {
-      title: this.newTaskTitle,
-      description: this.newTaskDescription, // Optional: Add this if you have a description field
+    const newTask: Omit<Task, 'id'> = {
+      title: title,
+      description: description,
       completed: false
     };
-    this.http.post('http://localhost:4000/add', newTask).subscribe(() => {
-      this.getTasks(); // Refresh the list
-      this.newTaskTitle = ''; // Reset the title input
-      this.newTaskDescription = ''; // Reset the description input if you have one
+    this.http.post<Task>('http://localhost:4000/add', newTask).subscribe({
+      next: (response) => {
+        this.tasks.push({ ...response });
+        this.showModal = false;
+        this.newTask = {};
+      },
+      error: (error) => {
+        console.error('Failed to add the task:', error);
+      },
+      complete: () => {
+        this.getTasks();
+      }
     });
   }
 
-  deleteTask(task: Task) {
-    this.http.delete(`http://localhost:4000/delete/${task.id}`).subscribe(() => {
-      this.getTasks(); // Refresh the list
+  deleteTask(task: Task): void {
+    this.http.delete(`http://localhost:4000/delete/${task.id}`).subscribe({
+      next: () => {
+        this.tasks = this.tasks.filter(t => t.id !== task.id);
+        this.filteredTasks = this.tasks.filter(task => task.completed === this.showCompleted);
+      },
+      error: (error) => {
+        console.error('Failed to delete the task:', error);
+      }
     });
   }
 
-  toggleTaskCompletion(task: Task) {
-    this.http.put(`http://localhost:4000/edit/${task.id}`, { completed: !task.completed }).subscribe(() => {
-      this.getTasks(); // Refresh the list
+  toggleTaskCompletion(task: Task): void {
+    const originalStatus = task.completed;
+    task.completed = !task.completed;
+    this.http.put(`http://localhost:4000/edit/${task.id}`, { completed: task.completed }).subscribe({
+      next: () => {
+        this.filteredTasks = this.tasks.filter(task => task.completed === this.showCompleted);
+      },
+      error: (error) => {
+        console.error('Failed to toggle the task completion:', error);
+        task.completed = originalStatus; 
+      }
     });
   }
 
   startEditing(task: Task): void {
     task.isEditing = true;
-    this.editTaskTitle = task.title; // Store the current title in case of canceling
+    this.editTaskTitle = task.title; 
   }
 
   cancelEditing(task: Task): void {
@@ -87,15 +103,19 @@ export class SimpleTodoComponent implements OnInit {
   }
 
   saveTask(task: Task): void {
+    const originalTitle = task.title;
     task.isEditing = false;
-    task.title = this.editTaskTitle; // Save the edited title
-    this.http.put(`http://localhost:4000/edit/${task.id}`, { title: task.title }).subscribe(() => {
-      this.getTasks(); // Refresh the list
+    task.title = this.editTaskTitle; 
+    this.http.put(`http://localhost:4000/edit/${task.id}`, { title: task.title }).subscribe({
+      error: (error) => {
+        console.error('Failed to save the task:', error);
+        task.title = originalTitle; 
+      }
     });
   }
 
   filterTasks(showCompleted: boolean) {
     this.showCompleted = showCompleted;
     this.filteredTasks = this.tasks.filter(task => task.completed === showCompleted);
-  }
+  }  
 }

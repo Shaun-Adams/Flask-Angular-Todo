@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JiraCloneTodoComponent } from './jira-clone-todo.component';
+import { AddTaskModalComponent } from './add-task-modal.component';
 
-describe('JiraCloneTodoComponent', () => {
-  let component: JiraCloneTodoComponent;
-  let fixture: ComponentFixture<JiraCloneTodoComponent>;
+describe('AddTaskModalComponent', () => {
+  let component: AddTaskModalComponent;
+  let fixture: ComponentFixture<AddTaskModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JiraCloneTodoComponent ]
+      declarations: [ AddTaskModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JiraCloneTodoComponent);
+    fixture = TestBed.createComponent(AddTaskModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,15 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-/* styles.css */
+
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(120deg, #ff5858, #f857a6);
+    background: linear-gradient(120deg, #ff5858c7, #f857a5dc);
     font-family: 'Arial', sans-serif;
   }
   
