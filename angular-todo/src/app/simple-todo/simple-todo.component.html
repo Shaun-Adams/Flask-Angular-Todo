@@ -3,7 +3,11 @@
         <div class="col-md-12">
             <div class="header-container">
                 <h1>Todo List</h1>
-                <button class="tinder-btn">+</button>
+                <!-- ... existing HTML ... -->
+<button class="tinder-btn" (click)="taskModal.openModal()">+</button>
+<app-task-modal #taskModal (onAddTask)="addTask($event.title, $event.description)"></app-task-modal>
+<!-- ... rest of your HTML ... -->
+
             </div>
         </div>
     </div>
