@@ -17,9 +17,27 @@ export class EditTaskModalComponent {
   @Output() taskUpdated = new EventEmitter<Task>();
   @Output() closeModalEvent = new EventEmitter<void>();
 
+  editedTitle: string = '';
+  editedDescription?: string = '';
+
+  constructor() {}
+
+  ngOnChanges(): void {
+    if (this.task) {
+      this.editedTitle = this.task.title;
+      this.editedDescription = this.task.description;
+    }
+  }
+
   onEditTask() {
-    if (this.task && this.task.title.trim()) {
-      this.taskUpdated.emit(this.task);
+    if (this.task && this.editedTitle.trim()) {
+      // Emit the updated task
+      this.taskUpdated.emit({
+        ...this.task,
+        title: this.editedTitle,
+        description: this.editedDescription,
+      });
+      this.closeModal();
     }
   }
 
